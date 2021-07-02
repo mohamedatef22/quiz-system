@@ -16,4 +16,9 @@ class Answer extends Model
         'body',
         'is_correct',
     ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

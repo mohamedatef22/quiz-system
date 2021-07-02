@@ -15,4 +15,14 @@ class Question extends Model
         'quiz_id',
         'body',
     ];
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
 }

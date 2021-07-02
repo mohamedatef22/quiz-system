@@ -42,4 +42,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function my_rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
+    public function enrolled_rooms()
+    {
+        return $this->belongsToMany(Room::class, 'room_user')
+            ->as('room')
+            ->withPivot(['enrolled_at']);
+    }
+
+    public function quizzes()
+    {
+        return $this->belongsToMany(Quiz::class, 'user_quiz')
+            ->as('quiz')
+            ->withPivot([
+                'grade',
+                'started_at',
+                'ended_at',
+            ]);
+    }
 }

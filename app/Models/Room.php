@@ -14,4 +14,21 @@ class Room extends Model
         'user_id',
         'password',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'room_user')
+            ->as('user')
+            ->withPivot(['enrolled_at']);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
 }
