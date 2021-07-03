@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\RoomUserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,4 +18,9 @@ class room_user extends Model
         'user_id',
         'room_id',
     ];
+
+    protected static function newFactory()
+    {
+        return RoomUserFactory::new ();
+    }
 }

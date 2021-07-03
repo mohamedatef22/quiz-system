@@ -22,7 +22,8 @@ class AnswerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'body' => $this->faker->text(),
+            'is_correct' => $this->faker->randomElement([0, 1]),
         ];
     }
 }

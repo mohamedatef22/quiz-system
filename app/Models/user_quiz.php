@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\UserQuizFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,4 +18,9 @@ class user_quiz extends Model
         'user_id',
         'quiz_id',
     ];
+
+    protected static function newFactory()
+    {
+        return UserQuizFactory::new ();
+    }
 }
