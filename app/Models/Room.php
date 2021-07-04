@@ -14,6 +14,10 @@ class Room extends Model
         'user_id',
         'password',
     ];
+    // hide password
+    protected $hidden = [
+        'password',
+    ];
 
     public function users()
     {
