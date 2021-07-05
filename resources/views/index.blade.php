@@ -19,8 +19,9 @@
                                     $en = false;
                                 }
                             @endphp
-                            <button
-                                class="{{ $en ? 'bg-green-500 cursor-default' : 'bg-blue-600 hover:bg-blue-500' }} flex items-center text-white  rounded px-2 py-1  focus:outline-none focus:shadow-outline">
+                            <a class="{{ $en ? 'bg-green-500' : 'bg-blue-600 hover:bg-blue-500' }} 
+                                                flex items-center text-white  rounded px-2 py-1  focus:outline-none focus:shadow-outline"
+                                href="{{ route('room.show', ['room' => $room->id]) }}">
                                 @if (!$en)
                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +35,7 @@
                                         Enrolled
                                     </span>
                                 @endif
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="mt-2">
@@ -44,7 +45,7 @@
                             </div>
                             <img class="h-12 w-12 rounded-full"
                                 src="https://ui-avatars.com/api/?name=
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            {{ $room->owner->first_name }}+{{ $room->owner->last_name }}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {{ $room->owner->first_name }}+{{ $room->owner->last_name }}"
                                 alt="">
                             <div class="ml-2">
                                 <h3 class="sm:text-lg text-gray-800 font-medium">{{ $room->owner->first_name }}
