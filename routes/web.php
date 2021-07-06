@@ -24,6 +24,8 @@ Route::post('/room/{room}', [RoomController::class, 'enroll'])->name('room.enrol
 
 Route::get('/quiz/{quiz}', [QuizController::class, 'show'])->name('quiz.show');
 
+Route::get('/quiz/take/{quiz}', [QuizController::class, 'take'])->name('quiz.take');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

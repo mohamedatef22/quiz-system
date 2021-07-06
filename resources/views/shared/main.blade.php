@@ -28,6 +28,8 @@
             @yield('main')
         </main>
     </div>
+
+    @yield('script')
 </body>
 
 </html>
