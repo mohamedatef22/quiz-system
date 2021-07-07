@@ -5,7 +5,10 @@
 $colors = ['bg-green-500', 'bg-indigo-500', 'bg-red-500', ' bg-blue-500', ' bg-yellow-500', 'bg-purple-500'];
 // get list of quiz taken by user
 if (Auth::check()) {
-    $quizzes_taken = Auth::user()->quizzes;
+    $quizzes_taken = Auth::user()
+        ->quizzes()
+        ->where('room_id', $room->id)
+        ->get();
 }
 @endphp
 
