@@ -14,11 +14,6 @@ if (Auth::check()) {
 
 @section('main')
 
-    {{-- #FIXME fix style add toasterjs --}}
-    @if (Session::has('msg'))
-        {{ Session::get('msg') }}
-    @endif
-
     <div class="mx-4 mt-5">
         <div class="flex md:flex-nowrap flex-wrap bg-white shadow-md rounded-md px-6 py-4 my-6">
 

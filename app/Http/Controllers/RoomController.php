@@ -40,12 +40,12 @@ class RoomController extends Controller
                 ]);
                 $room->students_number++;
                 $room->save();
-                return redirect()->back()->with('msg', 'enrolled successfuly');
+                return redirect()->back()->with(['toaster_message' => 'enrolled successfuly', 'toaster_type' => 'success']);
             } else {
-                return redirect()->back()->with('msg', 'enrolled failed already enrolled');
+                return redirect()->back()->with(['toaster_message' => 'enrolled failed already enrolled', 'toaster_type' => 'error']);
             }
         }
 
-        return redirect()->back()->with('msg', 'wrong password')->withInput();
+        return redirect()->back()->with(['toaster_message' => 'wrong password', 'toaster_type' => 'error'])->withInput();
     }
 }
