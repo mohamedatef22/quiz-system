@@ -46,7 +46,7 @@ $is_taken = App\Http\Controllers\QuizController::isQuizTaken(Auth::user()->id, $
             </div>
 
         @endif
-        @if ($is_taken)
+        @if ($is_taken !== false)
             <div class="text-lg font-semibold p-2 mt-2">
                 Grade : <span class="text-sm bg-purple-500 text-white p-1">{{ $is_taken }}</span>
             </div>
