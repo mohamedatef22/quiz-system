@@ -10,6 +10,9 @@ class room_user extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = null;
+    public $incrementing = false;
+
     protected $table = 'room_user';
 
     public $timestamps = false;
@@ -17,6 +20,10 @@ class room_user extends Model
     protected $fillable = [
         'user_id',
         'room_id',
+    ];
+
+    protected $casts = [
+        'enrolled_at',
     ];
 
     protected static function newFactory()

@@ -48,4 +48,14 @@ class RoomController extends Controller
 
         return redirect()->back()->with(['toaster_message' => 'wrong password', 'toaster_type' => 'error'])->withInput();
     }
+
+    // utilities
+    public static function isRoomEnrolled($room_id, $user_id)
+    {
+        $is_enrolled_in_room = room_user::where('user_id', $user_id)->where('room_id', $room_id)->get();
+        if ($is_enrolled_in_room->contains('user_id', $user_id)) {
+            return true;
+        }
+        return false;
+    }
 }

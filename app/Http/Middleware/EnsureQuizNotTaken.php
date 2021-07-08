@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\user_quiz;
+use App\Http\Controllers\QuizController;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,16 +16,12 @@ class EnsureQuizNotTaken
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $quiz_id)
     {
-        return app(EnsureRoomEnrolled::class)->handle($request, function ($request) use ($next) {
-            $user_id = Auth::user()->id;
-            $quiz_id = $request->quiz->id;
-            $is_quiz_taken = user_quiz::where('user_id', $user_id)->where('quiz_id', $quiz_id)->get();
-            if ($is_quiz_taken->contains('user_id', $user_id)) {
-                return redirect()->back()->with(['toaster_message' => 'can\'t take quiz again', 'toaster_type' => 'warning']);
-            }
-            return $next($request);
-        });
+        $user_id = Auth::user()->id;
+        if (QuizController::isQuizTaken($user_id, $quiz_id, true)) {
+            return redirect()->route('home')->with(['toaster_message' => 'can\'t take quiz again', 'toaster_type' => 'warning']);
+        }
+        return $next($request);
     }
 }

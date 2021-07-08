@@ -5,6 +5,7 @@ $start = !$quiz->start_at || ($quiz->start_at && $quiz->start_at->isPast());
 $end = $quiz->end_at && $quiz->end_at->isPast();
 
 $is_count_down = $quiz->start_at;
+$is_taken = App\Http\Controllers\QuizController::isQuizTaken(Auth::user()->id, $quiz->id, false, true);
 @endphp
 @section('main')
     <div class="flex flex-col items-center bg-white shadow-md rounded-md mt-10 p-5">
@@ -45,14 +46,21 @@ $is_count_down = $quiz->start_at;
             </div>
 
         @endif
-        @if (!$end)
-            <a href="{{ route('quiz.take', ['quiz' => $quiz->id]) }}" id="quiz-start"
-               class="bg-green-500 p-3 mt-3 text-gray-100 block {{ $start && !$end ? '' : 'hidden' }}">Start
-                Quiz</a>
-        @else
+        @if ($is_taken)
+            <div class="text-lg font-semibold p-2 mt-2">
+                Grade : <span class="text-sm bg-purple-500 text-white p-1">{{ $is_taken }}</span>
+            </div>
+            <div class="text-red-500 text-lg border-2 border-red-400 p-2 mt-5">
+                Quiz Has Been Taken Can't take it again !
+            </div>
+        @elseif($end)
             <div class="text-red-500 text-lg border-2 border-red-400 p-2 mt-5">
                 Quiz Has Been Ended Can't take it !
             </div>
+        @else
+            <a href="{{ route('quiz.take', ['quiz' => $quiz->id]) }}" id="quiz-start"
+               class="bg-green-500 p-3 mt-3 text-gray-100 block {{ $start && !$end ? '' : 'hidden' }}">Start
+                Quiz</a>
         @endif
     </div>
 @endsection

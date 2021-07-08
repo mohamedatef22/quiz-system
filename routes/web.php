@@ -26,6 +26,10 @@ Route::get('/quiz/{quiz}', [QuizController::class, 'show'])->name('quiz.show');
 
 Route::get('/quiz/take/{quiz}', [QuizController::class, 'take'])->name('quiz.take');
 
+Route::post('/quiz/submit/{quiz}', [QuizController::class, 'submit'])->name('quiz.submit');
+
+// Route::get('/quiz/result/{quiz}', [QuizController::class, 'result'])->name('quiz.result');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
