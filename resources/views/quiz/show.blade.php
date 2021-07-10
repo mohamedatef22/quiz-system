@@ -5,7 +5,7 @@ $start = !$quiz->start_at || ($quiz->start_at && $quiz->start_at->isPast());
 $end = $quiz->end_at && $quiz->end_at->isPast();
 
 $is_count_down = $quiz->start_at;
-$is_taken = App\Http\Controllers\QuizController::isQuizTaken(Auth::user()->id, $quiz->id, false, true);
+$is_taken = App\Http\Controllers\QuizController::isQuizTaken(Auth::user()->id, $quiz->id, true);
 @endphp
 @section('main')
     <div class="flex flex-col items-center bg-white shadow-md rounded-md mt-10 p-5">

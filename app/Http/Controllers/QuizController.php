@@ -75,16 +75,15 @@ class QuizController extends Controller
 
     // utilities
 
-    public static function isQuizTaken($user_id, $quiz_id, $check_ended_date = false, $return_grade = false)
+    public static function isQuizTaken($user_id, $quiz_id, $return_grade = false)
     {
         $is_quiz_taken = user_quiz::where('user_id', $user_id)->where('quiz_id', $quiz_id)->get();
         if ($is_quiz_taken->contains('user_id', $user_id)) {
+            if (is_null($is_quiz_taken[0]->ended_at)) {
+                return false;
+            }
             if ($return_grade) {
                 return $is_quiz_taken[0]->grade;
-            }
-            if ($check_ended_date &&
-                is_null($is_quiz_taken[0]->ended_at)) {
-                return false;
             }
             return true;
         }

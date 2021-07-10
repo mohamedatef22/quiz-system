@@ -1,9 +1,13 @@
 @extends('shared.main')
 @php
-App\Models\user_quiz::create([
-    'user_id' => Auth::user()->id,
-    'quiz_id' => $quiz->id,
-]);
+try {
+    App\Models\user_quiz::create([
+        'user_id' => Auth::user()->id,
+        'quiz_id' => $quiz->id,
+    ]);
+} catch (\Throwable $th) {
+}
+
 @endphp
 @section('main')
     <div id="clockdiv" class="flex space-x-2 mx-auto items-center mt-5">

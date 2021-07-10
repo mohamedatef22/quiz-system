@@ -19,7 +19,7 @@ class EnsureQuizNotTaken
     public function handle(Request $request, Closure $next, $quiz_id)
     {
         $user_id = Auth::user()->id;
-        if (QuizController::isQuizTaken($user_id, $quiz_id, true)) {
+        if (QuizController::isQuizTaken($user_id, $quiz_id)) {
             return redirect()->route('home')->with(['toaster_message' => 'can\'t take quiz again', 'toaster_type' => 'warning']);
         }
         return $next($request);
