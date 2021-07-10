@@ -83,7 +83,7 @@ class QuizController extends Controller
                 return $is_quiz_taken[0]->grade;
             }
             if ($check_dates_too &&
-                $is_quiz_taken[0]->started_at->eq($is_quiz_taken[0]->ended_at)) {
+                $is_quiz_taken[0]->started_at->diffInSeconds($is_quiz_taken[0]->ended_at) < 60) {
                 return false;
             }
             return true;
