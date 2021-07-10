@@ -18,7 +18,7 @@ class CreateUserQuizTable extends Migration
             $table->foreignId('quiz_id');
             $table->unsignedInteger('grade')->default(0);
             $table->timestamp('started_at')->useCurrent();
-            $table->timestamp('ended_at')->default(now());
+            $table->timestamp('ended_at')->nullable();
 
             $table->unique(['user_id', 'quiz_id']);
         });
