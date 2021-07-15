@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RoomController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +32,18 @@ Route::post('/quiz/submit/{quiz}', [QuizController::class, 'submit'])->name('qui
 
 // Route::get('/quiz/result/{quiz}', [QuizController::class, 'result'])->name('quiz.result');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [InstructorController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard/room/{room}/students', [InstructorController::class, 'showStudents'])->name('students.show');
+Route::get('/dashboard/students', [InstructorController::class, 'students'])->name('students');
 
+Route::post('/be/instructor', function () {
+    $user = Auth::user();
+    $user->role = 'instructor';
+    $user->save();
+
+    return redirect()->route('home')->with([
+        'toaster_message' => 'You are now Instructor :)',
+        'toaster_type' => 'success',
+    ]);
+})->middleware('auth')->name('be.in');
 require __DIR__ . '/auth.php';

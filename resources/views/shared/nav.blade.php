@@ -7,6 +7,16 @@
 
         @else
             {{-- #FIXME need to be removed --}}
+            @if (Auth::user()->role === 'instructor')
+                <a href="{{ route('dashboard') }}" class="hover:bg-gray-900 p-3 block">Dashboard</a>
+            @else
+                <form method="POST" action="{{ route('be.in') }}">
+                    @csrf
+                    <a href="{{ route('be.in') }}" class="hover:bg-gray-900 p-3 block" onclick="event.preventDefault();
+                this.closest('form').submit();" class="hover:bg-gray-900 p-3 block">Be Instructor</a>
+
+                </form>
+            @endif
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
