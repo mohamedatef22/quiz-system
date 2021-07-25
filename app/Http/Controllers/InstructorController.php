@@ -50,4 +50,36 @@ class InstructorController extends Controller
         }
         return redirect()->route('students.show', ['room' => $room]);
     }
+
+    public function rooms()
+    {
+        $rooms = Auth::user()->my_rooms()->latest()->paginate(10);
+        // dd($rooms);
+        return view('instructor.rooms.index', compact('rooms'));
+    }
+
+    public function createRoom()
+    {
+        return view('instructor.rooms.create');
+    }
+
+    public function storeRoom(Request $request)
+    {
+        $validate = $request->validate([
+            'name' => ['required', 'min:3', 'max:255'],
+            'pass' => ['required', 'min:5', 'max:10'],
+        ]);
+
+        // #FIXME add condition for instructor only
+        $room = Room::create([
+            'name' => $validate["name"],
+            'password' => $validate["pass"],
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('rooms')->with([
+            'toaster_message' => 'Room Created successfuly',
+            'toaster_type' => 'success',
+        ]);
+    }
 }

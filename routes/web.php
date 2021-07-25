@@ -35,6 +35,9 @@ Route::post('/quiz/submit/{quiz}', [QuizController::class, 'submit'])->name('qui
 Route::get('/dashboard', [InstructorController::class, 'dashboard'])->name('dashboard');
 Route::get('/dashboard/room/{room}/students', [InstructorController::class, 'showStudents'])->name('students.show');
 Route::get('/dashboard/students', [InstructorController::class, 'students'])->name('students');
+Route::get('/dashboard/rooms', [InstructorController::class, 'rooms'])->name('rooms');
+Route::get('/dashboard/room/create', [InstructorController::class, 'createRoom'])->name('room.create');
+Route::post('/dashboard/room/create', [InstructorController::class, 'storeRoom'])->name('room.store');
 
 Route::post('/be/instructor', function () {
     $user = Auth::user();
